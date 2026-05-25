@@ -18,9 +18,6 @@
             align-items: center;
             overflow-x: hidden;
         }
-         <audio autoplay loop>
-    <source src="musik.mp3" type="audio/mpeg">
-</audio>
 
         /* Dekorasi Bunga di Sudut Atas */
         .flower-bg {
@@ -111,9 +108,41 @@
             font-weight: bold;
             color: #800020;
         }
+
+        /* Tombol Kontrol Musik Mengambang yang Estetis */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(128, 0, 32, 0.85);
+            color: #fff5f5;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+            transition: transform 0.2s ease;
+        }
+        .music-control:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
+
+    <!-- Elemen Musik Tersembunyi -->
+    <audio id="myAudio" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Tombol Mengambang Play/Pause -->
+    <div class="music-control" id="musicBtn" onclick="toggleMusic()">🎵</div>
 
     <!-- Dekorasi Bunga Statis -->
     <div class="flower-bg flower-left">🌸</div>
@@ -209,15 +238,41 @@
             <div class="divider">🌸 Aku Mencintaimu 🌸</div>
             <p>Selamanya & Selalu</p>
         </footer>
-<audio autoplay loop>
-    <source src="musik.mp3" type="audio/mpeg">
-</audio>
 
     </div>
 
+    <!-- Sistem Kontrol Musik Otomatis -->
+    <script>
+        const audio = document.getElementById('myAudio');
+        const btn = document.getElementById('musicBtn');
+
+        // Fungsi putar otomatis saat layar diklik atau digulir pertama kali
+        function startAudio() {
+            audio.play().then(() => {
+                btn.innerHTML = "🎵";
+                // Hapus event listener agar tidak terus-terusan memicu fungsi ini
+                document.removeEventListener('click', startAudio);
+                document.removeEventListener('touchstart', startAudio);
+            }).catch(error => {
+                console.log("Menunggu interaksi pengguna untuk memutar musik.");
+            });
+        }
+
+        // Jalankan fungsi begitu ada ketukan/klik di halaman
+        document.addEventListener('click', startAudio);
+        document.addEventListener('touchstart', startAudio);
+
+        // Fungsi manual untuk tombol pojok kanan bawah
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                btn.innerHTML = "🎵";
+            } else {
+                audio.pause();
+                btn.innerHTML = "🔇";
+            }
+        }
+    </script>
+
 </body>
 </html>
-
-<audio autoplay loop>
-    <source src="musik.mp3" type="audio/mpeg">
-</audio>
