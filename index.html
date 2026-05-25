@@ -12,7 +12,6 @@
             font-display: swap;
         }
 
-        /* Teks Menggunakan font.ttf */
         body, .caption, .watermark-bg {
             font-family: 'FontRomanceUtama', 'Georgia', serif;
         }
@@ -35,13 +34,13 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 1; /* Lapisan terbawah */
-            opacity: 0.05; /* Sangat samar (5% terlihat) */
-            color: #800020; /* Warna Maroon */
+            z-index: -1; /* Dipaksa ke paling belakang agar tidak memblokir tombol */
+            opacity: 0.05; 
+            color: #800020; 
             font-size: 2.2rem;
             line-height: 1.8;
             letter-spacing: 3px;
-            pointer-events: none; /* Klik bisa tembus */
+            pointer-events: none; 
             overflow: hidden;
             text-align: justify;
             padding: 20px;
@@ -51,7 +50,7 @@
         /* Container Galeri Foto */
         .gallery-container {
             position: relative;
-            z-index: 10; /* Wajib di atas latar belakang tulisan Zahrah */
+            z-index: 10; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -66,14 +65,13 @@
             padding: 15px 15px 25px 15px;
             border-radius: 4px;
             box-shadow: 0 15px 35px rgba(128, 0, 32, 0.25), 0 5px 15px rgba(0,0,0,0.1);
-            border: 2px solid #800020; /* Garis Maroon Elegan */
+            border: 2px solid #800020; 
             max-width: 95%;
             width: 360px;
             box-sizing: border-box;
             transform: rotate(var(--rotation));
-            opacity: 1; /* Dikunci terbuka penuh agar tidak hilang */
+            opacity: 1; 
             
-            /* Efek memudar otomatis bawaan CSS browser saat dilewati ke atas */
             view-timeline-name: --revealing-photo;
             view-timeline-axis: block;
             animation-name: fadeOutAtTop;
@@ -82,7 +80,6 @@
             animation-range: exit 0% exit 100%;
         }
 
-        /* Efek Memudar Murni Menggunakan Fitur CSS Modern */
         @keyframes fadeOutAtTop {
             from { opacity: 1; filter: blur(0px); }
             to { opacity: 0.15; filter: blur(2px); }
@@ -95,7 +92,6 @@
             border-bottom: 1px solid rgba(128, 0, 32, 0.15);
         }
 
-        /* Gaya Teks Romantis di Bawah Foto */
         .caption {
             text-align: center;
             margin-top: 15px;
@@ -111,26 +107,25 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #800020; /* Maroon */
+            width: 65px;
+            height: 65px;
+            background-color: #800020; 
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            z-index: 9999; /* Lapisan paling atas agar selalu bisa diklik */
-            border: 2px solid #ffffff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            z-index: 99999; /* Dipastikan berada di lapisan paling atas layar */
+            border: 3px solid #ffffff;
         }
 
         .music-icon {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             fill: #ffffff !important;
         }
 
-        /* Animasi Berputar saat Musik Main */
         .music-control.playing {
             animation: spin 4s linear infinite;
         }
@@ -164,57 +159,57 @@
 
     <!-- Galeri Foto Bergulir -->
     <div class="gallery-container">
-        <div class="photo-frame" style="--rotation: -3deg;">
-            <img src="foto1.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Dari sekian banyak takdir di dunia, bersamamu adalah favoritku. 🤍</div>
-        </div>
-        <div class="photo-frame" style="--rotation: 4deg;">
-            <img src="foto2.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Semesta itu luas, tapi duniaku cuma berputar di kamu, Zahrah. ✨</div>
-        </div>
-        <div class="photo-frame" style="--rotation: -2deg;">
-            <img src="foto3.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Definisi bahagia paling sederhana? Saat nama kamu jadi alasan aku tersenyum hari ini. 🧸</div>
-        </div>
-        <div class="photo-frame" style="--rotation: 3deg;">
-            <img src="foto4.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Kamu itu kayak lagu favorit yang nggak pernah bosen aku putar ulang tiap hari. 🎵</div>
-        </div>
-        <div class="photo-frame" style="--rotation: -4deg;">
-            <img src="foto5.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Gak butuh validasi dunia, asal ada kamu di sampingku, semuanya udah lebih dari cukup. 🪐</div>
-        </div>
-        <div class="photo-frame" style="--rotation: 2deg;">
-            <img src="foto6.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Sejak ada kamu, aku gak pernah lagi bingung arah pulang. Karena rumahku itu, kamu. 🏡💞</div>
-        </div>
-        <div class="photo-frame" style="--rotation: -3deg;">
-            <img src="foto7.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Hari-hariku selalu punya warna baru semenjak kamu memutuskan untuk menetap. 🎨</div>
-        </div>
-        <div class="photo-frame" style="--rotation: 5deg;">
-            <img src="foto8.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Terima kasih ya, sudah lahir ke dunia dan jadi bagian paling indah di hidupku. 🥹❤️</div>
-        </div>
-        <div class="photo-frame" style="--rotation: -2deg;">
-            <img src="foto9.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
-            <div class="caption">Orang bilang jatuh cinta itu rumit, tapi sama kamu semuanya terasa begitu natural. 🍃</div>
-        </div>
-        <div class="photo-frame" style="--rotation: 4deg;">
-            <img src="foto10.jpg" alt="Moments" onerror="this.src='https://placehold.co0'">
-            <div class="caption">Kamu adalah doa yang diam-diam selalu aku bicarakan dengan Tuhan. 🌌</div>
-        </div>
-        <div class="photo-frame" style="--rotation: -5deg;">
-            <img src="foto11.jpg" alt="Moments" onerror="this.src='https://placehold.co1'">
-            <div class="caption">Mau seberat apa pun harinya, liat notif atau senyum kamu langsung bikin sembuh lagi. 🩹💘</div>
-        </div>
-        <div class="photo-frame" style="--rotation: 3deg;">
-            <img src="foto12.jpg" alt="Moments" onerror="this.src='https://placehold.co2'">
-            <div class="caption">Plot twist terbaik dalam hidupku adalah ketika aku menemukan kamu di antara miliaran orang. 🗺️</div>
-        </div>
-        <div class="photo-frame" style="--rotation: -2deg;">
-            <img src="foto13.jpg" alt="Moments" onerror="this.src='https://placehold.co3'">
-            <div class="caption">Selamanya itu lama, tapi kalau dilewati bareng kamu, rasanya aku gak keberatan. I love you. 💍🔒</div>
-        </div>
+        <div class="photo-frame" style="--rotation: -3deg;"><img src="foto1.jpg" alt="Moments"><div class="caption">Dari sekian banyak takdir di dunia, bersamamu adalah favoritku. 🤍</div></div>
+        <div class="photo-frame" style="--rotation: 4deg;"><img src="foto2.jpg" alt="Moments"><div class="caption">Semesta itu luas, tapi duniaku cuma berputar di kamu, Zahrah. ✨</div></div>
+        <div class="photo-frame" style="--rotation: -2deg;"><img src="foto3.jpg" alt="Moments"><div class="caption">Definisi bahagia paling sederhana? Saat nama kamu jadi alasan aku tersenyum hari ini. 🧸</div></div>
+        <div class="photo-frame" style="--rotation: 3deg;"><img src="foto4.jpg" alt="Moments"><div class="caption">Kamu itu kayak lagu favorit yang nggak pernah bosen aku putar ulang tiap hari. 🎵</div></div>
+        <div class="photo-frame" style="--rotation: -4deg;"><img src="foto5.jpg" alt="Moments"><div class="caption">Gak butuh validasi dunia, asal ada kamu di sampingku, semuanya udah lebih dari cukup. 🪐</div></div>
+        <div class="photo-frame" style="--rotation: 2deg;"><img src="foto6.jpg" alt="Moments"><div class="caption">Sejak ada kamu, aku gak pernah lagi bingung arah pulang. Karena rumahku itu, kamu. 🏡💞</div></div>
+        <div class="photo-frame" style="--rotation: -3deg;"><img src="foto7.jpg" alt="Moments"><div class="caption">Hari-hariku selalu punya warna baru semenjak kamu memutuskan untuk menetap. 🎨</div></div>
+        <div class="photo-frame" style="--rotation: 5deg;"><img src="foto8.jpg" alt="Moments"><div class="caption">Terima kasih ya, sudah lahir ke dunia dan jadi bagian paling indah di hidupku. 🥹❤️</div></div>
+        <div class="photo-frame" style="--rotation: -2deg;"><img src="foto9.jpg" alt="Moments"><div class="caption">Orang bilang jatuh cinta itu rumit, tapi sama kamu semuanya terasa begitu natural. 🍃</div></div>
+        <div class="photo-frame" style="--rotation: 4deg;"><img src="foto10.jpg" alt="Moments"><div class="caption">Kamu adalah doa yang diam-diam selalu aku bicarakan dengan Tuhan. 🌌</div></div>
+        <div class="photo-frame" style="--rotation: -5deg;"><img src="foto11.jpg" alt="Moments"><div class="caption">Mau seberat apa pun harinya, liat notif atau senyum kamu langsung bikin sembuh lagi. 🩹💘</div></div>
+        <div class="photo-frame" style="--rotation: 3deg;"><img src="foto12.jpg" alt="Moments"><div class="caption">Plot twist terbaik dalam hidupku adalah ketika aku menemukan kamu di antara miliaran orang. 🗺️</div></div>
+        <div class="photo-frame" style="--rotation: -2deg;"><img src="foto13.jpg" alt="Moments"><div class="caption">Selamanya itu lama, tapi kalau dilewati bareng kamu, rasanya aku gak keberatan. I love you. 💍🔒</div></div>
     </div>
 
+    <!-- Audio Element Menggunakan Segala Macam Variasi Nama File -->
+    <audio id="bg-music-1" src="musik.mp3" loop preload="auto"></audio>
+    <audio id="bg-music-2" src="musik.MP3" loop preload="auto"></audio>
+    <audio id="bg-music-3" src="Musik.mp3" loop preload="auto"></audio>
+
+    <!-- Tombol Musik Mengambang -->
+    <div class="music-control" id="music-btn" onclick="putarMusikSempurna()">
+        <svg class="music-icon" id="music-svg" viewBox="0 0 24 24" xmlns="http://w3.org">
+            <path id="music-path" d="M8 5v14l11-7z"/>
+        </svg>
+    </div>
+
+    <script>
+        /* 1. KONTROL AUDIO UTAMA (Anti Gagal) */
+        const a1 = document.getElementById('bg-music-1');
+        const a2 = document.getElementById('bg-music-2');
+        const a3 = document.getElementById('bg-music-3');
+        const btn = document.getElementById('music-btn');
+        const path = document.getElementById('music-path');
+        
+        function putarMusikSempurna() {
+            // Coba memutar opsi file pertama, jika diblokir atau gagal, tembak opsi berikutnya
+            a1.play().then(() => { updateUI(a1); }).catch(() => {
+                a2.play().then(() => { updateUI(a2); }).catch(() => {
+                    a3.play().then(() => { updateUI(a3); }).catch(() => {
+                        // Paksa mainkan tanpa validasi jika browser sangat ketat
+                        if(a1.paused) { a1.play(); updateUI(a1); } else { a1.pause(); updateUI(a1); }
+                    });
+                });
+            });
+        }
+
+        function updateUI(audioObj) {
+            if (!audioObj.paused) {
+                btn.classList.add('playing');
+                path.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z'); // Ubah ke Pause
+            } else {
+                audioObj.pause();
+                btn.classList.remove('playing');
