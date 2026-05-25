@@ -28,7 +28,7 @@
             position: relative;
         }
 
-        /* 2. LATAR BELAKANG TULISAN "ZAHRAH" (Dikunci di paling bawah agar tidak menutupi foto) */
+        /* 2. LATAR BELAKANG TULISAN "ZAHRAH" */
         .watermark-bg {
             position: fixed;
             top: 0;
@@ -60,7 +60,7 @@
             box-sizing: border-box;
         }
 
-        /* Bingkai Foto Polaroid Elegan - DIJAMIN 100% PASTI LANGSUNG MUNCUL */
+        /* Bingkai Foto Polaroid Elegan */
         .photo-frame {
             background: #ffffff;
             padding: 15px 15px 25px 15px;
@@ -106,7 +106,7 @@
             padding: 0 5px;
         }
 
-        /* Tombol Musik Bulat Mengambang (Pojok Kanan Bawah) */
+        /* Tombol Musik Bulat Mengambang */
         .music-control {
             position: fixed;
             bottom: 30px;
@@ -154,7 +154,7 @@
 </head>
 <body>
 
-    <!-- Latar Belakang Tulisan Zahrah (Aman di lapisan bawah) -->
+    <!-- Latar Belakang Tulisan Zahrah -->
     <div class="watermark-bg">
         Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah
     </div>
@@ -164,78 +164,64 @@
 
     <!-- Galeri Foto Bergulir -->
     <div class="gallery-container">
-        
         <div class="photo-frame" style="--rotation: -3deg;">
             <img src="foto1.jpg" alt="Moments">
             <div class="caption">Dari sekian banyak takdir di dunia, bersamamu adalah favoritku. 🤍</div>
         </div>
-
         <div class="photo-frame" style="--rotation: 4deg;">
             <img src="foto2.jpg" alt="Moments">
             <div class="caption">Semesta itu luas, tapi duniaku cuma berputar di kamu, Zahrah. ✨</div>
         </div>
-
         <div class="photo-frame" style="--rotation: -2deg;">
             <img src="foto3.jpg" alt="Moments">
             <div class="caption">Definisi bahagia paling sederhana? Saat nama kamu jadi alasan aku tersenyum hari ini. 🧸</div>
         </div>
-
         <div class="photo-frame" style="--rotation: 3deg;">
             <img src="foto4.jpg" alt="Moments">
             <div class="caption">Kamu itu kayak lagu favorit yang nggak pernah bosen aku putar ulang tiap hari. 🎵</div>
         </div>
-
         <div class="photo-frame" style="--rotation: -4deg;">
             <img src="foto5.jpg" alt="Moments">
             <div class="caption">Gak butuh validasi dunia, asal ada kamu di sampingku, semuanya udah lebih dari cukup. 🪐</div>
         </div>
-
         <div class="photo-frame" style="--rotation: 2deg;">
             <img src="foto6.jpg" alt="Moments">
             <div class="caption">Sejak ada kamu, aku gak pernah lagi bingung arah pulang. Karena rumahku itu, kamu. 🏡💞</div>
         </div>
-
         <div class="photo-frame" style="--rotation: -3deg;">
             <img src="foto7.jpg" alt="Moments">
             <div class="caption">Hari-hariku selalu punya warna baru semenjak kamu memutuskan untuk menetap. 🎨</div>
         </div>
-
         <div class="photo-frame" style="--rotation: 5deg;">
             <img src="foto8.jpg" alt="Moments">
             <div class="caption">Terima kasih ya, sudah lahir ke dunia dan jadi bagian paling indah di hidupku. 🥹❤️</div>
         </div>
-
         <div class="photo-frame" style="--rotation: -2deg;">
             <img src="foto9.jpg" alt="Moments">
             <div class="caption">Orang bilang jatuh cinta itu rumit, tapi sama kamu semuanya terasa begitu natural. 🍃</div>
         </div>
-
         <div class="photo-frame" style="--rotation: 4deg;">
             <img src="foto10.jpg" alt="Moments">
             <div class="caption">Kamu adalah doa yang diam-diam selalu aku bicarakan dengan Tuhan. 🌌</div>
         </div>
-
         <div class="photo-frame" style="--rotation: -5deg;">
             <img src="foto11.jpg" alt="Moments">
             <div class="caption">Mau seberat apa pun harinya, liat notif atau senyum kamu langsung bikin sembuh lagi. 🩹💘</div>
         </div>
-
         <div class="photo-frame" style="--rotation: 3deg;">
             <img src="foto12.jpg" alt="Moments">
             <div class="caption">Plot twist terbaik dalam hidupku adalah ketika aku menemukan kamu di antara miliaran orang. 🗺️</div>
         </div>
-
         <div class="photo-frame" style="--rotation: -2deg;">
             <img src="foto13.jpg" alt="Moments">
             <div class="caption">Selamanya itu lama, tapi kalau dilewati bareng kamu, rasanya aku gak keberatan. I love you. 💍🔒</div>
         </div>
-
     </div>
 
     <!-- Audio Musik Utama -->
     <audio id="bg-music" src="musik.mp3" loop preload="auto"></audio>
 
-    <!-- Tombol Musik Bulat Murni HTML/CSS (Metode Paling Kebal Error) -->
+    <!-- Tombol Musik Bulat Murni HTML/CSS -->
     <div class="music-control" id="music-btn" onclick="putarMusikSempurna()">
         <svg class="music-icon" id="music-svg" viewBox="0 0 24 24" xmlns="http://w3.org">
             <path id="music-path" d="M8 5v14l11-7z"/>
@@ -243,7 +229,7 @@
     </div>
 
     <script>
-        /* 1. KONTROL AUDIO (Metode Langsung & Paling Responsif) */
+        /* 1. KONTROL AUDIO JAVASCRIPT */
         const audioSistem = document.getElementById('bg-music');
         const tombolSistem = document.getElementById('music-btn');
         const ikonSistem = document.getElementById('music-path');
@@ -251,3 +237,6 @@
         function putarMusikSempurna() {
             if (audioSistem.paused) {
                 audioSistem.play()
+                    .then(() => {
+                        tombolSistem.classList.add('playing');
+                        ikonSistem.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z'); // Ubah ke ikon Pause
