@@ -11,6 +11,9 @@
             padding: 0;
             box-sizing: border-box;
         }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: #ffebf0; /* Pink muda imut */
             font-family: 'Georgia', serif;
@@ -57,14 +60,16 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(to bottom, #ffd1dc, #ffebf0); /* Gradasi pink lembut */
+            background: linear-gradient(to bottom, #ffd1dc, #ffebf0);
             padding: 20px;
+            position: relative;
+            z-index: 10;
         }
         header h1 {
             font-size: 3rem;
             color: #800020; /* Merah maroon */
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(74, 12, 22, 0.15); /* Bayangan maroon halus pada teks */
+            text-shadow: 2px 2px 4px rgba(74, 12, 22, 0.15);
         }
         header p {
             font-size: 1.2rem;
@@ -73,18 +78,16 @@
             margin-bottom: 30px;
         }
         .scroll-btn {
-            background-color: #800020; /* Tombol maroon */
+            background-color: #800020;
             color: white;
             border: none;
             padding: 12px 24px;
             font-size: 1rem;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(128, 0, 32, 0.3); /* Bayangan maroon pada tombol */
-            transition: transform 0.3s;
-        }
-        .scroll-btn:hover {
-            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(128, 0, 32, 0.3);
+            display: inline-block;
+            text-decoration: none;
         }
 
         /* --- KONTROL TOMBOL AUDIO --- */
@@ -111,29 +114,30 @@
         .gallery-container {
             max-width: 700px;
             margin: 0 auto;
-            padding: 0 20px 100px 20px;
+            padding: 100px 20px 100px 20px;
         }
 
-        /* --- BINGKAI ELEGAN DAN FADE EFFECT --- */
+        /* --- BINGKAI ELEGAN DAN FADE EFFECT (ANTI-BUG) --- */
         .story-block {
             margin-bottom: 120px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             display: flex;
             justify-content: center;
+            /* Efek pudar murni CSS saat halaman di-scroll */
+            animation: fadeInAndOut linear both;
+            animation-timeline: view();
+            animation-range: entry 10% cover 40%;
         }
-        /* Efek memudar otomatis saat digulir lewat */
-        .story-block.visible {
-            opacity: 1;
-            transform: translateY(0);
+        
+        @keyframes fadeInAndOut {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
+
         .romantic-frame {
             background: #ffffff;
             padding: 20px 20px 40px 20px;
-            border-radius: 12px; /* Sudut sedikit membulat agar lebih imut */
-            /* Menggunakan bayangan merah maroon (rgba dari #4a0c16) */
-            box-shadow: 0 15px 35px rgba(74, 12, 22, 0.12); 
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(74, 12, 22, 0.15); /* Bayangan merah maroon tebal */
             border: 6px double #ffd1dc;
             position: relative;
             max-width: 100%;
@@ -145,7 +149,7 @@
             top: -20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #ffebf0; /* Menyesuaikan warna latar pink muda */
+            background: #ffebf0;
             padding: 0 10px;
             font-size: 1.5rem;
         }
@@ -160,7 +164,7 @@
             margin-top: 20px;
             font-size: 1.1rem;
             font-style: italic;
-            color: #4a0c16; /* Teks caption maroon */
+            color: #4a0c16;
         }
 
         /* --- FOOTER --- */
@@ -175,13 +179,13 @@
 </head>
 <body>
 
-    <!-- Musik Latar (Memanggil musik.mp3) -->
+    <!-- Musik Latar (Akurat memanggil musik.mp3) -->
     <audio id="romantic-music" loop>
         <source src="musik.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Tombol Navigasi Musik Manual -->
-    <div class="audio-control" id="audio-toggle" title="Putar/Jeda Musik">🎵</div>
+    <!-- Tombol Kontrol Audio -->
+    <div class="audio-control" id="audio-toggle" onclick="toggleMusic()" title="Putar/Jeda Musik">🎵</div>
 
     <!-- Wadah Efek Kelopak -->
     <div id="petal-container"></div>
@@ -190,8 +194,12 @@
     <header>
         <h1>Our Love Story</h1>
         <p>Gulir ke bawah untuk melihat kenangan manis kita...</p>
-        <button class="scroll-btn" onclick="startExperience()">Mulai Cerita ✨</button>
+        <!-- Tombol diganti menggunakan jangkar HTML murni, 100% anti-macet -->
+        <a href="#cerita" class="scroll-btn" onclick="startMusicOnly()">Mulai Cerita ✨</a>
     </header>
+
+    <!-- Titik Awal Gulir -->
+    <div id="cerita"></div>
 
     <!-- Konten Utama Galeri Foto -->
     <main class="gallery-container">
@@ -199,7 +207,7 @@
         <!-- Foto 1 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto1.jpg" alt="Foto Kenangan 1" loading="lazy">
+                <img src="foto1.jpg" alt="Foto Kenangan 1">
                 <div class="caption">Momen indah pertama kita...</div>
             </div>
         </div>
@@ -207,7 +215,7 @@
         <!-- Foto 2 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto2.jpg" alt="Foto Kenangan 2" loading="lazy">
+                <img src="foto2.jpg" alt="Foto Kenangan 2">
                 <div class="caption">Senyumanmu yang selalu menenangkan...</div>
             </div>
         </div>
@@ -215,7 +223,7 @@
         <!-- Foto 3 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto3.jpg" alt="Foto Kenangan 3" loading="lazy">
+                <img src="foto3.jpg" alt="Foto Kenangan 3">
                 <div class="caption">Setiap detik bersamamu berharga...</div>
             </div>
         </div>
@@ -223,7 +231,7 @@
         <!-- Foto 4 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto4.jpg" alt="Foto Kenangan 4" loading="lazy">
+                <img src="foto4.jpg" alt="Foto Kenangan 4">
                 <div class="caption">Tawa yang selalu kita bagikan berdua...</div>
             </div>
         </div>
@@ -231,7 +239,7 @@
         <!-- Foto 5 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto5.jpg" alt="Foto Kenangan 5" loading="lazy">
+                <img src="foto5.jpg" alt="Foto Kenangan 5">
                 <div class="caption">Menatap masa depan bersama...</div>
             </div>
         </div>
@@ -239,7 +247,7 @@
         <!-- Foto 6 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto6.jpg" alt="Foto Kenangan 6" loading="lazy">
+                <img src="foto6.jpg" alt="Foto Kenangan 6">
                 <div class="caption">Hari-hari biasa menjadi istimewa...</div>
             </div>
         </div>
@@ -247,7 +255,7 @@
         <!-- Foto 7 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto7.jpg" alt="Foto Kenangan 7" loading="lazy">
+                <img src="foto7.jpg" alt="Foto Kenangan 7">
                 <div class="caption">Selalu ada cerita di setiap langkah...</div>
             </div>
         </div>
@@ -255,7 +263,7 @@
         <!-- Foto 8 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto8.jpg" alt="Foto Kenangan 8" loading="lazy">
+                <img src="foto8.jpg" alt="Foto Kenangan 8">
                 <div class="caption">Genggaman tangan yang menguatkan...</div>
             </div>
         </div>
@@ -263,7 +271,7 @@
         <!-- Foto 9 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto9.jpg" alt="Foto Kenangan 9" loading="lazy">
+                <img src="foto9.jpg" alt="Foto Kenangan 9">
                 <div class="caption">Saat dunia terasa milik kita berdua...</div>
             </div>
         </div>
@@ -271,7 +279,7 @@
         <!-- Foto 10 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto10.jpg" alt="Foto Kenangan 10" loading="lazy">
+                <img src="foto10.jpg" alt="Foto Kenangan 10">
                 <div class="caption">Terima kasih telah hadir di hidupku...</div>
             </div>
         </div>
@@ -279,7 +287,7 @@
         <!-- Foto 11 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto11.jpg" alt="Foto Kenangan 11" loading="lazy">
+                <img src="foto11.jpg" alt="Foto Kenangan 11">
                 <div class="caption">Cinta yang terus tumbuh setiap hari...</div>
             </div>
         </div>
@@ -287,7 +295,7 @@
         <!-- Foto 12 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto12.jpg" alt="Foto Kenangan 12" loading="lazy">
+                <img src="foto12.jpg" alt="Foto Kenangan 12">
                 <div class="caption">Menjaga rasa ini hingga selamanya...</div>
             </div>
         </div>
@@ -295,7 +303,7 @@
         <!-- Foto 13 -->
         <div class="story-block">
             <div class="romantic-frame">
-                <img src="foto13.jpg" alt="Foto Kenangan 13" loading="lazy">
+                <img src="foto13.jpg" alt="Foto Kenangan 13">
                 <div class="caption">Selamanya, kamu adalah duniaku. ❤️</div>
             </div>
         </div>
@@ -308,3 +316,6 @@
 
     <script>
         const music = document.getElementById('romantic-music');
+        const audioToggle = document.getElementById('audio-toggle');
+
+        // Fungsi khusus memutar musik saat klik tombol utama
