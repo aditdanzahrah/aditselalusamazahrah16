@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untukmu Selamanya</title>
+    <style>
+        /* Gaya Dasar & Latar Belakang Pink dengan Bayangan Maroon */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffb6c1; /* Pink pastel */
+            box-shadow: inset 0 0 100px rgba(128, 0, 32, 0.4); /* Bayangan maroon */
+            font-family: 'Georgia', serif;
+            color: #4a0e17;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Dekorasi Bunga di Sudut Atas */
+        .flower-bg {
+            position: fixed;
+            top: 10px;
+            font-size: 2rem;
+            z-index: 10;
+            opacity: 0.8;
+        }
+        .flower-left { left: 20px; }
+        .flower-right { right: 20px; }
+
+        /* Pembungkus Konten Tema Gulir */
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px; /* Jarak antar elemen saat digulir */
+        }
+
+        /* Desain Judul Utama */
+        header {
+            text-align: center;
+            margin-top: 20px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            color: #800020; /* Maroon */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 5px;
+        }
+        header p {
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        /* Kartu Bingkai Foto Elegan & Indah */
+        .photo-card {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 4px;
+            /* Bingkai Elegan Ganda bergaya klasik */
+            border: 8px double #800020; 
+            box-shadow: 0 10px 25px rgba(128, 0, 32, 0.3);
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Mengatur Foto agar Pas dan Tidak Rusak */
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid #d4af37; /* Sentuhan bingkai emas tipis di dalam */
+            margin-bottom: 15px;
+        }
+
+        /* Kata-kata Romantis di Bawah Foto */
+        .romantic-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-style: italic;
+            color: #5c061a;
+            padding: 0 10px;
+        }
+
+        /* Dekorasi Pembatas Bunga Kecil */
+        .divider {
+            font-size: 1.5rem;
+            color: #800020;
+            margin-top: 10px;
+        }
+
+        /* Pesan Penutup di Bagian Paling Bawah */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #800020;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dekorasi Bunga Statis -->
+    <div class="flower-bg flower-left">🌸</div>
+    <div class="flower-bg flower-right">🌸</div>
+
+    <div class="container">
+        
+        <header>
+            <h1>Kisah Kita</h1>
+            <p>Gulir ke bawah untuk melihat kebersamaan kita...</p>
+            <div class="divider">🌹</div>
+        </header>
+
+        <!-- BINGKAI FOTO 1 -->
+        <div class="photo-card">
+            <img src="foto1.jpg" alt="Momen Kita 1">
+            <p class="romantic-text">"Sejak pertama kali melihatmu, aku tahu duniaku tidak akan pernah sama lagi tanpa hadirmu."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 2 -->
+        <div class="photo-card">
+            <img src="foto2.jpg" alt="Momen Kita 2">
+            <p class="romantic-text">"Kamu adalah alasan di balik senyuman yang hadir di setiap pagi dan ketenangan di setiap malam."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 3 -->
+        <div class="photo-card">
+            <img src="foto3.jpg" alt="Momen Kita 3">
+            <p class="romantic-text">"Setiap detik bersamamu adalah bagian favorit dalam rangkaian cerita hidupku."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 4 -->
+        <div class="photo-card">
+            <img src="foto4.jpg" alt="Momen Kita 4">
+            <p class="romantic-text">"Bukan karena apa adanya kamu, tapi karena bagaimana aku merasa utuh saat berada di dekatmu."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 5 -->
+        <div class="photo-card">
+            <img src="foto5.jpg" alt="Momen Kita 5">
+            <p class="romantic-text">"Kamu tidak hanya mengisi hariku, kamu mewarnai seluruh mimpiku dengan keindahan."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 6 -->
+        <div class="photo-card">
+            <img src="foto6.jpg" alt="Momen Kita 6">
+            <p class="romantic-text">"Dalam tenangnya tatapanmu, aku menemukan rumah tempat hatiku ingin selalu pulang."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 7 -->
+        <div class="photo-card">
+            <img src="foto7.jpg" alt="Momen Kita 7">
+            <p class="romantic-text">"Jarak dan waktu mungkin menantang, namun rasa ini terlalu kokoh untuk sekadar goyah."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 8 -->
+        <div class="photo-card">
+            <img src="foto8.jpg" alt="Momen Kita 8">
+            <p class="romantic-text">"Terima kasih telah berjalan di sampingku, menggenggam jemariku melewati setiap musim."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 9 -->
+        <div class="photo-card">
+            <img src="foto9.jpg" alt="Momen Kita 9">
+            <p class="romantic-text">"Mencintaimu adalah hal paling alami dan terindah yang pernah dilakukan oleh hatiku."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 10 -->
+        <div class="photo-card">
+            <img src="foto10.jpg" alt="Momen Kita 10">
+            <p class="romantic-text">"Kamu adalah bait puisi terindah yang tuhan tuliskan di dalam lembaran takdirku."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 11 -->
+        <div class="photo-card">
+            <img src="foto11.jpg" alt="Momen Kita 11">
+            <p class="romantic-text">"Jika disuruh memilih berulang kali, hatiku akan tetap menunjukmu tanpa ragu."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 12 -->
+        <div class="photo-card">
+            <img src="foto12.jpg" alt="Momen Kita 12">
+            <p class="romantic-text">"Masa depan bersamamu adalah satu-satunya tempat yang ingin aku tuju."</p>
+        </div>
+
+        <!-- BINGKAI FOTO 13 -->
+        <div class="photo-card">
+            <img src="foto13.jpg" alt="Momen Kita 13">
+            <p class="romantic-text">"Hingga lembar terakhir kehidupan, namamu akan selalu menjadi akhir yang bahagia untukku."</p>
+        </div>
+
+        <footer>
+            <div class="divider">🌸 Aku Mencintaimu 🌸</div>
+            <p>Selamanya & Selalu</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
