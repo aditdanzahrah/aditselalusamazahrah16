@@ -3,213 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Zahrah</title>
+    <title>Our Romance Journey</title>
     <style>
-        /* 1. DEKLARASI FONT CUSTOM (font.ttf) */
-        @font-face {
-            font-family: 'FontRomanceUtama';
-            src: url('font.ttf') format('truetype');
-            font-display: swap;
-        }
-
-        body, .caption, .watermark-bg {
-            font-family: 'FontRomanceUtama', 'Georgia', serif;
-        }
-
-        /* Desain Latar Belakang & Efek Bayangan Maroon */
-        body {
+        /* --- RESET & STYLES DASAR --- */
+        * {
             margin: 0;
             padding: 0;
-            background-color: #ffe4e1; /* Pink Muda */
-            box-shadow: inset 0 0 120px rgba(128, 0, 32, 0.4); /* Bayangan Maroon */
-            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #ffebf0; /* Pink muda imut */
+            font-family: 'Georgia', serif;
             overflow-x: hidden;
-            position: relative;
+            color: #4a0c16; /* Teks merah maroon tua */
         }
 
-        /* 2. LATAR BELAKANG TULISAN "ZAHRAH" */
-        .watermark-bg {
+        /* --- DEKORASI BACKGROUND KELOPAK GUGUR --- */
+        #petal-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1; /* Dipaksa ke paling belakang agar tidak memblokir tombol */
-            opacity: 0.05; 
-            color: #800020; 
-            font-size: 2.2rem;
-            line-height: 1.8;
-            letter-spacing: 3px;
-            pointer-events: none; 
-            overflow: hidden;
-            text-align: justify;
-            padding: 20px;
-            box-sizing: border-box;
+            pointer-events: none;
+            z-index: 999;
+        }
+        .petal {
+            position: absolute;
+            background-image: url('kelopak.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
-        /* Container Galeri Foto */
-        .gallery-container {
-            position: relative;
-            z-index: 10; 
+        /* --- HALAMAN PEMBUKA (HERO) --- */
+        header {
+            height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 80px 20px;
-            gap: 100px;
-            box-sizing: border-box;
-        }
-
-        /* Bingkai Foto Polaroid Elegan */
-        .photo-frame {
-            background: #ffffff;
-            padding: 15px 15px 25px 15px;
-            border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(128, 0, 32, 0.25), 0 5px 15px rgba(0,0,0,0.1);
-            border: 2px solid #800020; 
-            max-width: 95%;
-            width: 360px;
-            box-sizing: border-box;
-            transform: rotate(var(--rotation));
-            opacity: 1; 
-            
-            view-timeline-name: --revealing-photo;
-            view-timeline-axis: block;
-            animation-name: fadeOutAtTop;
-            animation-fill-mode: both;
-            animation-timeline: --revealing-photo;
-            animation-range: exit 0% exit 100%;
-        }
-
-        @keyframes fadeOutAtTop {
-            from { opacity: 1; filter: blur(0px); }
-            to { opacity: 0.15; filter: blur(2px); }
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-bottom: 1px solid rgba(128, 0, 32, 0.15);
-        }
-
-        .caption {
             text-align: center;
-            margin-top: 15px;
-            color: #800020;
+            background: linear-gradient(to bottom, #ffd1dc, #ffebf0); /* Gradasi pink lembut */
+            padding: 20px;
+        }
+        header h1 {
+            font-size: 3rem;
+            color: #800020; /* Merah maroon */
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(74, 12, 22, 0.15); /* Bayangan maroon halus pada teks */
+        }
+        header p {
             font-size: 1.2rem;
-            line-height: 1.5;
-            font-weight: 500;
-            padding: 0 5px;
+            font-style: italic;
+            color: #a3485e;
+            margin-bottom: 30px;
+        }
+        .scroll-btn {
+            background-color: #800020; /* Tombol maroon */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(128, 0, 32, 0.3); /* Bayangan maroon pada tombol */
+            transition: transform 0.3s;
+        }
+        .scroll-btn:hover {
+            transform: scale(1.05);
         }
 
-        /* Tombol Musik Bulat Mengambang */
-        .music-control {
+        /* --- KONTROL TOMBOL AUDIO --- */
+        .audio-control {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 65px;
-            height: 65px;
-            background-color: #800020; 
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
             border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(128, 0, 32, 0.2);
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-            z-index: 99999; /* Dipastikan berada di lapisan paling atas layar */
-            border: 3px solid #ffffff;
+            font-size: 1.2rem;
+            border: 2px solid #800020;
         }
 
-        .music-icon {
-            width: 28px;
-            height: 28px;
-            fill: #ffffff !important;
+        /* --- WADAH LUAR GALERI --- */
+        .gallery-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 20px 100px 20px;
         }
 
-        .music-control.playing {
-            animation: spin 4s linear infinite;
+        /* --- BINGKAI ELEGAN DAN FADE EFFECT --- */
+        .story-block {
+            margin-bottom: 120px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            display: flex;
+            justify-content: center;
+        }
+        /* Efek memudar otomatis saat digulir lewat */
+        .story-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .romantic-frame {
+            background: #ffffff;
+            padding: 20px 20px 40px 20px;
+            border-radius: 12px; /* Sudut sedikit membulat agar lebih imut */
+            /* Menggunakan bayangan merah maroon (rgba dari #4a0c16) */
+            box-shadow: 0 15px 35px rgba(74, 12, 22, 0.12); 
+            border: 6px double #ffd1dc;
+            position: relative;
+            max-width: 100%;
+            text-align: center;
+        }
+        .romantic-frame::before {
+            content: "💝";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffebf0; /* Menyesuaikan warna latar pink muda */
+            padding: 0 10px;
+            font-size: 1.5rem;
+        }
+        .romantic-frame img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+            border: 1px solid #ffe3e3;
+        }
+        .romantic-frame .caption {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #4a0c16; /* Teks caption maroon */
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Kanvas Animasi Kelopak Bunga */
-        #petal-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #ffd1dc;
+            color: #800020;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Latar Belakang Tulisan Zahrah -->
-    <div class="watermark-bg">
-        Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah
-    </div>
+    <!-- Musik Latar (Memanggil musik.mp3) -->
+    <audio id="romantic-music" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- Canvas Efek Kelopak -->
-    <canvas id="petal-canvas"></canvas>
+    <!-- Tombol Navigasi Musik Manual -->
+    <div class="audio-control" id="audio-toggle" title="Putar/Jeda Musik">🎵</div>
 
-    <!-- Galeri Foto Bergulir -->
-    <div class="gallery-container">
-        <div class="photo-frame" style="--rotation: -3deg;"><img src="foto1.jpg" alt="Moments"><div class="caption">Dari sekian banyak takdir di dunia, bersamamu adalah favoritku. 🤍</div></div>
-        <div class="photo-frame" style="--rotation: 4deg;"><img src="foto2.jpg" alt="Moments"><div class="caption">Semesta itu luas, tapi duniaku cuma berputar di kamu, Zahrah. ✨</div></div>
-        <div class="photo-frame" style="--rotation: -2deg;"><img src="foto3.jpg" alt="Moments"><div class="caption">Definisi bahagia paling sederhana? Saat nama kamu jadi alasan aku tersenyum hari ini. 🧸</div></div>
-        <div class="photo-frame" style="--rotation: 3deg;"><img src="foto4.jpg" alt="Moments"><div class="caption">Kamu itu kayak lagu favorit yang nggak pernah bosen aku putar ulang tiap hari. 🎵</div></div>
-        <div class="photo-frame" style="--rotation: -4deg;"><img src="foto5.jpg" alt="Moments"><div class="caption">Gak butuh validasi dunia, asal ada kamu di sampingku, semuanya udah lebih dari cukup. 🪐</div></div>
-        <div class="photo-frame" style="--rotation: 2deg;"><img src="foto6.jpg" alt="Moments"><div class="caption">Sejak ada kamu, aku gak pernah lagi bingung arah pulang. Karena rumahku itu, kamu. 🏡💞</div></div>
-        <div class="photo-frame" style="--rotation: -3deg;"><img src="foto7.jpg" alt="Moments"><div class="caption">Hari-hariku selalu punya warna baru semenjak kamu memutuskan untuk menetap. 🎨</div></div>
-        <div class="photo-frame" style="--rotation: 5deg;"><img src="foto8.jpg" alt="Moments"><div class="caption">Terima kasih ya, sudah lahir ke dunia dan jadi bagian paling indah di hidupku. 🥹❤️</div></div>
-        <div class="photo-frame" style="--rotation: -2deg;"><img src="foto9.jpg" alt="Moments"><div class="caption">Orang bilang jatuh cinta itu rumit, tapi sama kamu semuanya terasa begitu natural. 🍃</div></div>
-        <div class="photo-frame" style="--rotation: 4deg;"><img src="foto10.jpg" alt="Moments"><div class="caption">Kamu adalah doa yang diam-diam selalu aku bicarakan dengan Tuhan. 🌌</div></div>
-        <div class="photo-frame" style="--rotation: -5deg;"><img src="foto11.jpg" alt="Moments"><div class="caption">Mau seberat apa pun harinya, liat notif atau senyum kamu langsung bikin sembuh lagi. 🩹💘</div></div>
-        <div class="photo-frame" style="--rotation: 3deg;"><img src="foto12.jpg" alt="Moments"><div class="caption">Plot twist terbaik dalam hidupku adalah ketika aku menemukan kamu di antara miliaran orang. 🗺️</div></div>
-        <div class="photo-frame" style="--rotation: -2deg;"><img src="foto13.jpg" alt="Moments"><div class="caption">Selamanya itu lama, tapi kalau dilewati bareng kamu, rasanya aku gak keberatan. I love you. 💍🔒</div></div>
-    </div>
+    <!-- Wadah Efek Kelopak -->
+    <div id="petal-container"></div>
 
-    <!-- Audio Element Menggunakan Segala Macam Variasi Nama File -->
-    <audio id="bg-music-1" src="musik.mp3" loop preload="auto"></audio>
-    <audio id="bg-music-2" src="musik.MP3" loop preload="auto"></audio>
-    <audio id="bg-music-3" src="Musik.mp3" loop preload="auto"></audio>
+    <!-- Tampilan Awal Website -->
+    <header>
+        <h1>Our Love Story</h1>
+        <p>Gulir ke bawah untuk melihat kenangan manis kita...</p>
+        <button class="scroll-btn" onclick="startExperience()">Mulai Cerita ✨</button>
+    </header>
 
-    <!-- Tombol Musik Mengambang -->
-    <div class="music-control" id="music-btn" onclick="putarMusikSempurna()">
-        <svg class="music-icon" id="music-svg" viewBox="0 0 24 24" xmlns="http://w3.org">
-            <path id="music-path" d="M8 5v14l11-7z"/>
-        </svg>
-    </div>
+    <!-- Konten Utama Galeri Foto -->
+    <main class="gallery-container">
+        
+        <!-- Foto 1 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto1.jpg" alt="Foto Kenangan 1" loading="lazy">
+                <div class="caption">Momen indah pertama kita...</div>
+            </div>
+        </div>
+
+        <!-- Foto 2 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto2.jpg" alt="Foto Kenangan 2" loading="lazy">
+                <div class="caption">Senyumanmu yang selalu menenangkan...</div>
+            </div>
+        </div>
+
+        <!-- Foto 3 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto3.jpg" alt="Foto Kenangan 3" loading="lazy">
+                <div class="caption">Setiap detik bersamamu berharga...</div>
+            </div>
+        </div>
+
+        <!-- Foto 4 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto4.jpg" alt="Foto Kenangan 4" loading="lazy">
+                <div class="caption">Tawa yang selalu kita bagikan berdua...</div>
+            </div>
+        </div>
+
+        <!-- Foto 5 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto5.jpg" alt="Foto Kenangan 5" loading="lazy">
+                <div class="caption">Menatap masa depan bersama...</div>
+            </div>
+        </div>
+
+        <!-- Foto 6 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto6.jpg" alt="Foto Kenangan 6" loading="lazy">
+                <div class="caption">Hari-hari biasa menjadi istimewa...</div>
+            </div>
+        </div>
+
+        <!-- Foto 7 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto7.jpg" alt="Foto Kenangan 7" loading="lazy">
+                <div class="caption">Selalu ada cerita di setiap langkah...</div>
+            </div>
+        </div>
+
+        <!-- Foto 8 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto8.jpg" alt="Foto Kenangan 8" loading="lazy">
+                <div class="caption">Genggaman tangan yang menguatkan...</div>
+            </div>
+        </div>
+
+        <!-- Foto 9 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto9.jpg" alt="Foto Kenangan 9" loading="lazy">
+                <div class="caption">Saat dunia terasa milik kita berdua...</div>
+            </div>
+        </div>
+
+        <!-- Foto 10 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto10.jpg" alt="Foto Kenangan 10" loading="lazy">
+                <div class="caption">Terima kasih telah hadir di hidupku...</div>
+            </div>
+        </div>
+
+        <!-- Foto 11 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto11.jpg" alt="Foto Kenangan 11" loading="lazy">
+                <div class="caption">Cinta yang terus tumbuh setiap hari...</div>
+            </div>
+        </div>
+
+        <!-- Foto 12 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto12.jpg" alt="Foto Kenangan 12" loading="lazy">
+                <div class="caption">Menjaga rasa ini hingga selamanya...</div>
+            </div>
+        </div>
+
+        <!-- Foto 13 -->
+        <div class="story-block">
+            <div class="romantic-frame">
+                <img src="foto13.jpg" alt="Foto Kenangan 13" loading="lazy">
+                <div class="caption">Selamanya, kamu adalah duniaku. ❤️</div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Dibuat dengan cinta untukmu, selamanya. &copy; 2026</p>
+    </footer>
 
     <script>
-        /* 1. KONTROL AUDIO UTAMA (Anti Gagal) */
-        const a1 = document.getElementById('bg-music-1');
-        const a2 = document.getElementById('bg-music-2');
-        const a3 = document.getElementById('bg-music-3');
-        const btn = document.getElementById('music-btn');
-        const path = document.getElementById('music-path');
-        
-        function putarMusikSempurna() {
-            // Coba memutar opsi file pertama, jika diblokir atau gagal, tembak opsi berikutnya
-            a1.play().then(() => { updateUI(a1); }).catch(() => {
-                a2.play().then(() => { updateUI(a2); }).catch(() => {
-                    a3.play().then(() => { updateUI(a3); }).catch(() => {
-                        // Paksa mainkan tanpa validasi jika browser sangat ketat
-                        if(a1.paused) { a1.play(); updateUI(a1); } else { a1.pause(); updateUI(a1); }
-                    });
-                });
-            });
-        }
-
-        function updateUI(audioObj) {
-            if (!audioObj.paused) {
-                btn.classList.add('playing');
-                path.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z'); // Ubah ke Pause
-            } else {
-                audioObj.pause();
-                btn.classList.remove('playing');
+        const music = document.getElementById('romantic-music');
