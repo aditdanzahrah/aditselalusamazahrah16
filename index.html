@@ -3,283 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untukmu Selamanya</title>
+    <title>Our Romance Gallery</title>
     <style>
-        /* Gaya Dasar & Latar Belakang Pink dengan Bayangan Maroon */
+        /* 1. DEKLARASI FONT CUSTOM (font.ttf) */
+        @font-face {
+            font-family: 'FontRomanceUtama';
+            src: url('font.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        /* Memaksa semua teks di website menggunakan font.ttf */
+        * {
+            font-family: 'FontRomanceUtama', 'Georgia', serif !important;
+        }
+
+        /* Desain Latar Belakang & Efek Bayangan Maroon */
         body {
             margin: 0;
             padding: 0;
-            background-color: #ffb6c1; /* Pink pastel */
-            box-shadow: inset 0 0 100px rgba(128, 0, 32, 0.4); /* Bayangan maroon */
-            font-family: 'Georgia', serif;
-            color: #4a0e17;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: #ffe4e1; /* Pink Muda */
+            box-shadow: inset 0 0 120px rgba(128, 0, 32, 0.4); /* Bayangan Maroon */
+            min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Dekorasi Bunga di Sudut Atas */
-        .flower-bg {
+        /* 2. LATAR BELAKANG PENUH TULISAN "ZAHRAH" SAMAR (Menggunakan font.ttf) */
+        body::before {
+            content: "Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah";
             position: fixed;
-            top: 10px;
-            font-size: 2rem;
-            z-index: 10;
-            opacity: 0.8;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            opacity: 0.04; /* Tingkat kesamaran (0.04 = 4% terlihat) */
+            color: #800020; /* Warna Maroon */
+            font-size: 2.5rem;
+            line-height: 1.8;
+            letter-spacing: 4px;
+            pointer-events: none;
+            overflow: hidden;
+            text-align: justify;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .flower-left { left: 20px; }
-        .flower-right { right: 20px; }
 
-        /* Pembungkus Konten Tema Gulir */
-        .container {
-            max-width: 600px;
-            width: 90%;
-            padding: 40px 0;
+        /* Container Utama Foto */
+        .gallery-container {
+            position: relative;
+            z-index: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 60px; /* Jarak antar elemen saat digulir */
+            padding: 100px 20px;
+            gap: 100px;
         }
 
-        /* Desain Judul Utama */
-        header {
-            text-align: center;
-            margin-top: 20px;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            color: #800020; /* Maroon */
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 5px;
-        }
-        header p {
-            font-style: italic;
-            font-size: 1rem;
-        }
-
-        /* Kartu Bingkai Foto Elegan & Indah dengan Efek Memudar Pasca-Scroll */
-        .photo-card {
-            background: #fff5f5;
-            padding: 15px;
+        /* Bingkai Foto Elegan Polaroids dengan Caption */
+        .photo-frame {
+            background: #fff;
+            padding: 15px 15px 25px 15px;
             border-radius: 4px;
-            border: 8px double #800020; /* Bingkai Elegan Ganda bergaya klasik */
-            box-shadow: 0 10px 25px rgba(128, 0, 32, 0.3);
-            width: 100%;
-            box-sizing: border-box;
-            text-align: center;
+            box-shadow: 0 15px 35px rgba(128, 0, 32, 0.25), 0 5px 15px rgba(0,0,0,0.08);
+            border: 2px solid #800020; /* Garis Maroon Elegan */
+            max-width: 90%;
+            width: 380px;
+            transform: rotate(var(--rotation));
             
-            /* EFEK UTAMA: Awalnya kartu tidak terlihat dan agak turun ke bawah */
+            /* Efek Memudar saat Scroll */
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(50px) rotate(var(--rotation));
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
-        /* KELAS PEMICU: Ketika layar digulir mendekati kartu, kelas ini aktif otomatis */
-        .photo-card.appear {
+        /* Ketika foto masuk area pandang (scroll) */
+        .photo-frame.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) rotate(var(--rotation));
         }
 
-        /* Efek Hover Tetap Berjalan Normal Setelah Kartu Muncul */
-        .photo-card.appear:hover {
-            transform: scale(1.02);
-            transition: transform 0.3s ease;
+        /* Ketika foto terlewat ke atas (semakin memudar) */
+        .photo-frame.fade-out {
+            opacity: 0.25;
+            filter: blur(1px);
         }
 
-        /* Mengatur Foto agar Pas dan Tidak Rusak */
-        .photo-card img {
+        .photo-frame img {
             width: 100%;
             height: auto;
             display: block;
-            border: 1px solid #d4af37; /* Sentuhan bingkai emas tipis di dalam */
-            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(128, 0, 32, 0.1);
         }
 
-        /* Kata-kata Romantis di Bawah Foto */
-        .romantic-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            font-style: italic;
-            color: #5c061a;
-            padding: 0 10px;
-        }
-
-        /* Dekorasi Pembatas Bunga Kecil */
-        .divider {
-            font-size: 1.5rem;
-            color: #800020;
-            margin-top: 10px;
-        }
-
-        /* Pesan Penutup di Bagian Paling Bawah */
-        footer {
+        /* Gaya Teks Romantis di Bawah Foto (Menggunakan font.ttf) */
+        .caption {
             text-align: center;
-            padding: 40px 0;
-            font-size: 1.2rem;
-            font-weight: bold;
+            margin-top: 15px;
             color: #800020;
+            font-size: 1.2rem;
+            line-height: 1.4;
+            font-weight: 500;
+            padding: 0 5px;
         }
 
-        /* Tombol Kontrol Musik Mengambang yang Estetis */
+        /* Tombol Musik Bulat Mengambang */
         .music-control {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(128, 0, 32, 0.85);
-            color: #fff5f5;
-            border: 2px solid #d4af37;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #800020; /* Maroon */
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            align-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 100;
-            transition: transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border: 2px solid #fff;
+            transition: transform 0.3s ease;
         }
+
         .music-control:hover {
             transform: scale(1.1);
         }
 
-        /* Gaya Khusus Efek Gambar Kelopak PNG Gugur */
-        .petal {
-            position: fixed;
-            top: -50px;
-            pointer-events: none; /* Supaya kelopak mawar tidak menghalangi klik pada layar */
-            animation: fall linear infinite;
-            z-index: 99;
+        .music-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
         }
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(110vh) rotate(360deg); }
+
+        /* Animasi Berputar saat Musik Main */
+        .music-control.playing {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Kanvas untuk Animasi Kelopak Bunga */
+        #petal-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
         }
     </style>
 </head>
 <body>
 
-    <!-- Elemen Musik Tersembunyi (Akan mencari musik.mp3 di github kamu) -->
-    <audio id="myAudio" loop>
-        <source src="musik.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Canvas Efek Kelopak -->
+    <canvas id="petal-canvas"></canvas>
 
-    <!-- Tombol Mengambang Play/Pause -->
-    <div class="music-control" id="musicBtn" onclick="toggleMusic()">🎵</div>
-
-    <!-- Dekorasi Bunga Statis -->
-    <div class="flower-bg flower-left">🌸</div>
-    <div class="flower-bg flower-right">🌸</div>
-
-    <div class="container">
+    <!-- Galeri Foto Bergulir -->
+    <div class="gallery-container">
         
-        <header>
-            <h1>Kisah Kita</h1>
-            <p>Gulir ke bawah untuk melihat kebersamaan kita...</p>
-            <div class="divider">🌹</div>
-        </header>
-
-        <!-- BINGKAI FOTO 1 -->
-        <div class="photo-card">
-            <img src="foto1.jpg" alt="Momen Kita 1">
-            <p class="romantic-text">"Sejak pertama kali melihatmu, aku tahu duniaku tidak akan pernah sama lagi tanpa hadirmu."</p>
+        <div class="photo-frame" style="--rotation: -3deg;">
+            <img src="foto1.jpg" alt="Moments">
+            <div class="caption">Dari sekian banyak takdir di dunia, bersamamu adalah favoritku. 🤍</div>
         </div>
 
-        <!-- BINGKAI FOTO 2 -->
-        <div class="photo-card">
-            <img src="foto2.jpg" alt="Momen Kita 2">
-            <p class="romantic-text">"Kamu adalah alasan di balik senyuman yang hadir di setiap pagi dan ketenangan di setiap malam."</p>
+        <div class="photo-frame" style="--rotation: 4deg;">
+            <img src="foto2.jpg" alt="Moments">
+            <div class="caption">Semesta itu luas, tapi duniaku cuma berputar di kamu, Zahrah. ✨</div>
         </div>
 
-        <!-- BINGKAI FOTO 3 -->
-        <div class="photo-card">
-            <img src="foto3.jpg" alt="Momen Kita 3">
-            <p class="romantic-text">"Setiap detik bersamamu adalah bagian favorit dalam rangkaian cerita hidupku."</p>
+        <div class="photo-frame" style="--rotation: -2deg;">
+            <img src="foto3.jpg" alt="Moments">
+            <div class="caption">Definisi bahagia paling sederhana? Saat nama kamu jadi alasan aku tersenyum hari ini. 🧸</div>
         </div>
 
-        <!-- BINGKAI FOTO 4 -->
-        <div class="photo-card">
-            <img src="foto4.jpg" alt="Momen Kita 4">
-            <p class="romantic-text">"Bukan karena apa adanya kamu, tapi karena bagaimana aku merasa utuh saat berada di dekatmu."</p>
+        <div class="photo-frame" style="--rotation: 3deg;">
+            <img src="foto4.jpg" alt="Moments">
+            <div class="caption">Kamu itu kayak lagu favorit yang nggak pernah bosen aku putar ulang tiap hari. 🎵</div>
         </div>
 
-        <!-- BINGKAI FOTO 5 -->
-        <div class="photo-card">
-            <img src="foto5.jpg" alt="Momen Kita 5">
-            <p class="romantic-text">"Kamu tidak hanya mengisi hariku, kamu mewarnai seluruh mimpiku dengan keindahan."</p>
+        <div class="photo-frame" style="--rotation: -4deg;">
+            <img src="foto5.jpg" alt="Moments">
+            <div class="caption">Gak butuh validasi dunia, asal ada kamu di sampingku, semuanya udah lebih dari cukup. 🪐</div>
         </div>
 
-        <!-- BINGKAI FOTO 6 -->
-        <div class="photo-card">
-            <img src="foto6.jpg" alt="Momen Kita 6">
-            <p class="romantic-text">"Dalam tenangnya tatapanmu, aku menemukan rumah tempat hatiku ingin selalu pulang."</p>
+        <div class="photo-frame" style="--rotation: 2deg;">
+            <img src="foto6.jpg" alt="Moments">
+            <div class="caption">Sejak ada kamu, aku gak pernah lagi bingung arah pulang. Karena rumahku itu, kamu. 🏡💞</div>
         </div>
 
-        <!-- BINGKAI FOTO 7 -->
-        <div class="photo-card">
-            <img src="foto7.jpg" alt="Momen Kita 7">
-            <p class="romantic-text">"Jarak dan waktu mungkin menantang, namun rasa ini terlalu kokoh untuk sekadar goyah."</p>
+        <div class="photo-frame" style="--rotation: -3deg;">
+            <img src="foto7.jpg" alt="Moments">
+            <div class="caption">Hari-hariku selalu punya warna baru semenjak kamu memutuskan untuk menetap. 🎨</div>
         </div>
 
-        <!-- BINGKAI FOTO 8 -->
-        <div class="photo-card">
-            <img src="foto8.jpg" alt="Momen Kita 8">
-            <p class="romantic-text">"Terima kasih telah berjalan di sampingku, menggenggam jemariku melewati setiap musim."</p>
+        <div class="photo-frame" style="--rotation: 5deg;">
+            <img src="foto8.jpg" alt="Moments">
+            <div class="caption">Terima kasih ya, sudah lahir ke dunia dan jadi bagian paling indah di hidupku. 🥹❤️</div>
         </div>
 
-        <!-- BINGKAI FOTO 9 -->
-        <div class="photo-card">
-            <img src="foto9.jpg" alt="Momen Kita 9">
-            <p class="romantic-text">"Mencintaimu adalah hal paling alami dan terindah yang pernah dilakukan oleh hatiku."</p>
+        <div class="photo-frame" style="--rotation: -2deg;">
+            <img src="foto9.jpg" alt="Moments">
+            <div class="caption">Orang bilang jatuh cinta itu rumit, tapi sama kamu semuanya terasa begitu natural. 🍃</div>
         </div>
 
-        <!-- BINGKAI FOTO 10 -->
-        <div class="photo-card">
-            <img src="foto10.jpg" alt="Momen Kita 10">
-            <p class="romantic-text">"Kamu adalah bait puisi terindah yang tuhan tuliskan di dalam lembaran takdirku."</p>
+        <div class="photo-frame" style="--rotation: 4deg;">
+            <img src="foto10.jpg" alt="Moments">
+            <div class="caption">Kamu adalah doa yang diam-diam selalu aku bicarakan dengan Tuhan. 🌌</div>
         </div>
 
-        <!-- BINGKAI FOTO 11 -->
-        <div class="photo-card">
-            <img src="foto11.jpg" alt="Momen Kita 11">
-            <p class="romantic-text">"Jika disuruh memilih berulang kali, hatiku akan tetap menunjukmu tanpa ragu."</p>
+        <div class="photo-frame" style="--rotation: -5deg;">
+            <img src="foto11.jpg" alt="Moments">
+            <div class="caption">Mau seberat apa pun harinya, liat notif atau senyum kamu langsung bikin sembuh lagi. 🩹💘</div>
         </div>
 
-        <!-- BINGKAI FOTO 12 -->
-        <div class="photo-card">
-            <img src="foto12.jpg" alt="Momen Kita 12">
-            <p class="romantic-text">"Masa depan bersamamu adalah satu-satunya tempat yang ingin aku tuju."</p>
+        <div class="photo-frame" style="--rotation: 3deg;">
+            <img src="foto12.jpg" alt="Moments">
+            <div class="caption">Plot twist terbaik dalam hidupku adalah ketika aku menemukan kamu di antara miliaran orang. 🗺️</div>
         </div>
 
-        <!-- BINGKAI FOTO 13 -->
-        <div class="photo-card">
-            <img src="foto13.jpg" alt="Momen Kita 13">
-            <p class="romantic-text">"Hingga lembar terakhir kehidupan, namamu akan selalu menjadi akhir yang bahagia untukku."</p>
+        <div class="photo-frame" style="--rotation: -2deg;">
+            <img src="foto13.jpg" alt="Moments">
+            <div class="caption">Selamanya itu lama, tapi kalau dilewati bareng kamu, rasanya aku gak keberatan. I love you. 💍🔒</div>
         </div>
-
-        <footer>
-            <div class="divider">🌸 Aku Mencintaimu 🌸</div>
-            <p>Selamanya & Selalu</p>
-        </footer>
 
     </div>
 
-    <!-- Sistem Kontrol Musik Otomatis, Efek Memudar, & Animasi Kelopak PNG -->
+    <!-- Audio Element -->
+    <audio id="bg-music" src="musik.mp3" loop></audio>
+
+    <!-- Tombol Musik Bulat -->
+    <div class="music-control" id="music-btn">
+        <svg class="music-icon" id="music-svg" viewBox="0 0 24 24">
+            <path id="music-path" d="M8 5v14l11-7z"/>
+        </svg>
+    </div>
+
     <script>
-        const audio = document.getElementById('myAudio');
-        const btn = document.getElementById('musicBtn');
-        const cards = document.querySelectorAll('.photo-card');
+        /* JAVASCRIPT: EFEK MEMUDAR SAAT SCROLL */
+        const frames = document.querySelectorAll('.photo-frame');
+        
+        const observerOptions = {
+            root: null,
+            threshold: 0.15,
+            rootMargin: "0px 0px -100px 0px"
+        };
 
-        // 1. Fungsi putar otomatis saat layar diklik pertama kali (Menghindari blokir browser)
-        function startAudio() {
-            audio.play().then(() => {
-                btn.innerHTML = "🎵";
-                document.removeEventListener('click', startAudio);
-                document.removeEventListener('touchstart', startAudio);
-            }).catch(error => {
-                console.log("Menunggu interaksi pengguna untuk memutar musik.");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.classList.remove('fade-out');
+                } else {
+                    if (entry.boundingClientRect.top < 0) {
+                        entry.target.classList.add('fade-out');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                }
             });
-        }
+        }, observerOptions);
 
-        // Jalankan fungsi begitu ada ketukan/klik pertama kali di halaman
+        frames.forEach(frame => observer.observe(frame));
+
+
+        /* JAVASCRIPT: KONTROL TOMBOL MUSIK */
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
