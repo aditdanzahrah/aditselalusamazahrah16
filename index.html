@@ -12,9 +12,9 @@
             font-display: swap;
         }
 
-        /* Memaksa semua teks di website menggunakan font.ttf */
-        * {
-            font-family: 'FontRomanceUtama', 'Georgia', serif !important;
+        /* Teks Menggunakan font.ttf */
+        body, .caption, .watermark-bg {
+            font-family: 'FontRomanceUtama', 'Georgia', serif;
         }
 
         /* Desain Latar Belakang & Efek Bayangan Maroon */
@@ -28,53 +28,54 @@
             position: relative;
         }
 
-        /* 2. LATAR BELAKANG PENUH TULISAN "ZAHRAH" SAMAR (Menggunakan font.ttf) */
-        body::before {
-            content: "Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah";
+        /* 2. LATAR BELAKANG PENUH TULISAN "ZAHRAH" SAMAR */
+        .watermark-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 0;
-            opacity: 0.04; /* Tingkat kesamaran (0.04 = 4% terlihat) */
+            z-index: 1; /* Di belakang galeri */
+            opacity: 0.05; /* Sangat samar (5% terlihat) */
             color: #800020; /* Warna Maroon */
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             line-height: 1.8;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             pointer-events: none;
             overflow: hidden;
             text-align: justify;
             padding: 20px;
             box-sizing: border-box;
+            word-wrap: break-word;
         }
 
         /* Container Utama Foto */
         .gallery-container {
             position: relative;
-            z-index: 2;
+            z-index: 5; /* Di atas watermark */
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 100px 20px;
+            padding: 80px 20px;
             gap: 100px;
+            box-sizing: border-box;
         }
 
         /* Bingkai Foto Elegan Polaroids dengan Caption */
         .photo-frame {
-            background: #fff;
+            background: #ffffff;
             padding: 15px 15px 25px 15px;
             border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(128, 0, 32, 0.25), 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 15px 35px rgba(128, 0, 32, 0.25), 0 5px 15px rgba(0,0,0,0.1);
             border: 2px solid #800020; /* Garis Maroon Elegan */
             max-width: 90%;
-            width: 380px;
-            transform: rotate(var(--rotation));
+            width: 360px;
+            box-sizing: border-box;
             
-            /* Efek Memudar saat Scroll */
+            /* Efek Memudar Awal saat Scroll */
             opacity: 0;
-            transform: translateY(50px) rotate(var(--rotation));
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(60px) rotate(var(--rotation));
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.5s ease;
         }
 
         /* Ketika foto masuk area pandang (scroll) */
@@ -93,16 +94,16 @@
             width: 100%;
             height: auto;
             display: block;
-            border-bottom: 1px solid rgba(128, 0, 32, 0.1);
+            border-bottom: 1px solid rgba(128, 0, 32, 0.15);
         }
 
-        /* Gaya Teks Romantis di Bawah Foto (Menggunakan font.ttf) */
+        /* Gaya Teks Romantis di Bawah Foto */
         .caption {
             text-align: center;
             margin-top: 15px;
             color: #800020;
             font-size: 1.2rem;
-            line-height: 1.4;
+            line-height: 1.5;
             font-weight: 500;
             padding: 0 5px;
         }
@@ -130,10 +131,11 @@
             transform: scale(1.1);
         }
 
+        /* Warna Ikon Putih */
         .music-icon {
             width: 24px;
             height: 24px;
-            fill: white;
+            fill: #ffffff !important; 
         }
 
         /* Animasi Berputar saat Musik Main */
@@ -153,11 +155,16 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 999;
+            z-index: 800;
         }
     </style>
 </head>
 <body>
+
+    <!-- Lapisan Watermark Teks Terpisah -->
+    <div class="watermark-bg">
+        Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah Zahrah
+    </div>
 
     <!-- Canvas Efek Kelopak -->
     <canvas id="petal-canvas"></canvas>
@@ -237,7 +244,7 @@
 
     <!-- Tombol Musik Bulat -->
     <div class="music-control" id="music-btn">
-        <svg class="music-icon" id="music-svg" viewBox="0 0 24 24">
+        <svg class="music-icon" id="music-svg" viewBox="0 0 24 24" xmlns="http://w3.org">
             <path id="music-path" d="M8 5v14l11-7z"/>
         </svg>
     </div>
@@ -248,8 +255,8 @@
         
         const observerOptions = {
             root: null,
-            threshold: 0.15,
-            rootMargin: "0px 0px -100px 0px"
+            threshold: 0.1,
+            rootMargin: "0px 0px -60px 0px"
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -259,17 +266,3 @@
                     entry.target.classList.remove('fade-out');
                 } else {
                     if (entry.boundingClientRect.top < 0) {
-                        entry.target.classList.add('fade-out');
-                    } else {
-                        entry.target.classList.remove('visible');
-                    }
-                }
-            });
-        }, observerOptions);
-
-        frames.forEach(frame => observer.observe(frame));
-
-
-        /* JAVASCRIPT: KONTROL TOMBOL MUSIK */
-        const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-btn');
