@@ -1,3 +1,10 @@
+Berikut adalah kode lengkap index.html milik Anda yang sudah saya rapi atau satukan kembali [1, 2].
+Semua koleksi 13 bingkai foto asli Anda, teks romantis pilihan Anda, sistem pemutar musik otomatis, pop-up sambutan awal, dan animasi kelopak bunga jatuh menggunakan file gambar kelopak.png sudah tertata rapi di dalamnya.
+## Cara Menggunakannya:
+
+   1. Pastikan Anda sudah mengunggah file gambar kelopak transparan ke GitHub Anda dengan nama kelopak.png (huruf kecil semua).
+   2. Salin seluruh kode di bawah ini, lalu tempel (paste) untuk mengganti total isi file index.html lama Anda di GitHub:
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -57,22 +64,31 @@
             font-size: 1rem;
         }
 
-        /* Kartu Bingkai Foto Elegan & Indah */
+        /* Kartu Bingkai Foto Elegan & Indah dengan Animasi Memudar (Scroll Reveal) */
         .photo-card {
             background: #fff5f5;
             padding: 15px;
             border-radius: 4px;
-            /* Bingkai Elegan Ganda bergaya klasik */
-            border: 8px double #800020; 
+            border: 8px double #800020; /* Bingkai Elegan Ganda bergaya klasik */
             box-shadow: 0 10px 25px rgba(128, 0, 32, 0.3);
             width: 100%;
             box-sizing: border-box;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            
+            /* Efek awal tidak terlihat, akan muncul halus saat digulir */
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        /* Kelas pemicu saat kartu foto masuk ke layar */
+        .photo-card.appear {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .photo-card:hover {
-            transform: scale(1.02);
+            transform: scale(1.02) !important; /* Transisi hover tetap bekerja pasca muncul */
         }
 
         /* Mengatur Foto agar Pas dan Tidak Rusak */
@@ -109,6 +125,47 @@
             color: #800020;
         }
 
+        /* Tampilan Pop-up Utama (Overlay) */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #800020; /* Warna Maroon Romantis */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: #fff5f5;
+            transition: opacity 0.5s ease;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .overlay h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+        .overlay button {
+            background: #fff5f5;
+            color: #800020;
+            border: 2px solid #d4af37;
+            padding: 14px 35px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+        .overlay button:hover {
+            transform: scale(1.05);
+        }
+
         /* Tombol Kontrol Musik Mengambang yang Estetis */
         .music-control {
             position: fixed;
@@ -132,9 +189,32 @@
         .music-control:hover {
             transform: scale(1.1);
         }
+
+        /* Efek Kelopak Gambar PNG Gugur */
+        .petal {
+            position: fixed;
+            top: -50px;
+            pointer-events: none; /* Supaya kelopak tidak mengganggu klik layar */
+            animation: fall linear infinite;
+            z-index: 99;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Pop-up Pembuka Surat Cinta -->
+    <div class="overlay" id="loveOverlay">
+        <h2>Halo Zahrah ❤️</h2>
+        <button onclick="openLetter()">Buka Surat Cinta 💌</button>
+    </div>
 
     <!-- Elemen Musik Tersembunyi -->
     <audio id="myAudio" loop>
@@ -228,51 +308,83 @@
             <p class="romantic-text">"Masa depan bersamamu adalah satu-satunya tempat yang ingin aku tuju."</p>
         </div>
 
-        <!-- BINGKAI FOTO 13 -->
-        <div class="photo-card">
-            <img src="foto13.jpg" alt="Momen Kita 13">
-            <p class="romantic-text">"Hingga lembar terakhir kehidupan, namamu akan selalu menjadi akhir yang bahagia untukku."</p>
-        </div>
 
-        <footer>
-            <div class="divider">🌸 Aku Mencintaimu 🌸</div>
-            <p>Selamanya & Selalu</p>
-        </footer>
 
-    </div>
 
-    <!-- Sistem Kontrol Musik Otomatis -->
-    <script>
-        const audio = document.getElementById('myAudio');
-        const btn = document.getElementById('musicBtn');
 
-        // Fungsi putar otomatis saat layar diklik atau digulir pertama kali
-        function startAudio() {
-            audio.play().then(() => {
-                btn.innerHTML = "🎵";
-                // Hapus event listener agar tidak terus-terusan memicu fungsi ini
-                document.removeEventListener('click', startAudio);
-                document.removeEventListener('touchstart', startAudio);
-            }).catch(error => {
-                console.log("Menunggu interaksi pengguna untuk memutar musik.");
-            });
-        }
+"Hingga lembar terakhir kehidupan, namamu akan selalu menjadi akhir yang bahagia untukku."
 
-        // Jalankan fungsi begitu ada ketukan/klik di halaman
-        document.addEventListener('click', startAudio);
-        document.addEventListener('touchstart', startAudio);
+🌸 Aku Mencintaimu 🌸
+Selamanya & Selalu
 
-        // Fungsi manual untuk tombol pojok kanan bawah
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-                btn.innerHTML = "🎵";
-            } else {
-                audio.pause();
-                btn.innerHTML = "🔇";
-            }
-        }
-    </script>
 
-</body>
-</html>
+const audio = document.getElementById('myAudio');
+const overlay = document.getElementById('loveOverlay');
+const btn = document.getElementById('musicBtn');
+const cards = document.querySelectorAll('.photo-card');
+// 1. Fungsi Tombol Buka Surat (Pop-up Menghilang & Musik Berputar Otomatis)
+function openLetter() {
+overlay.style.opacity = '0';
+setTimeout(() => {
+overlay.style.display = 'none';
+}, 500);
+audio.play().then(() => {
+btn.innerHTML = "🎵";
+}).catch(error => {
+console.log("Pemutaran musik otomatis diblokir browser.");
+});
+// Jalankan deteksi posisi kartu foto sesaat setelah surat dibuka
+checkScroll();
+}
+// 2. Fungsi Manual Tombol Musik di Pojok Kanan Bawah
+function toggleMusic() {
+if (audio.paused) {
+audio.play();
+btn.innerHTML = "🎵";
+} else {
+audio.pause();
+btn.innerHTML = "🔇";
+}
+}
+// 3. Efek Transisi Kartu Foto Memudar Saat Layar Digulir (Scroll Reveal)
+const checkScroll = () => {
+cards.forEach(card => {
+const cardTop = card.getBoundingClientRect().top;
+const triggerPoint = window.innerHeight * 0.85; // Muncul saat posisi kartu mencapai 85% layar bawah
+if (cardTop < triggerPoint) {
+card.classList.add('appear');
+}
+});
+};
+window.addEventListener('scroll', checkScroll);
+// 4. Sistem Generator Animasi Kelopak Bunga Berjatuhan Menggunakan Gambar PNG
+function createPetal() {
+// Jangan memunculkan kelopak jika surat belum dibuka agar layar pop-up tetap bersih
+if (overlay.style.display === 'none') {
+const petal = document.createElement('img');
+petal.classList.add('petal');
+petal.src = 'kelopak.png'; // Menghubungkan ke file kelopak.png Anda
+// Mengatur ukuran kelopak secara acak agar terkesan natural (15px - 32px)
+const size = Math.random() * 17 + 15;
+petal.style.width = size + 'px';
+petal.style.height = 'auto';
+// Mengatur koordinat horizontal sebaran kemunculan kelopak di lebar layar (0% - 100%)
+petal.style.left = Math.random() * 100 + 'vw';
+// Mengatur variasi kecepatan jatuh kelopak mawar (antara 4 - 7 detik)
+petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+// Mengatur variasi transparansi kelopak untuk menciptakan kedalaman efek 3D
+petal.style.opacity = Math.random() * 0.6 + 0.4;
+document.body.appendChild(petal);
+// Membersihkan sisa elemen kelopak lama yang sudah jatuh melewati layar bawah
+setTimeout(() => {
+petal.remove();
+}, 7000);
+}
+}
+// Memanggil kelopak baru untuk muncul setiap 0.4 detik sekali
+setInterval(createPetal, 400);
+
+
+Silakan diperbarui kodenya di GitHub. Jangan lupa, beri tahu saya jika Anda mengalami **kesulitan saat menguji tampilan terbarunya** bersama Zahrah!
+
+
