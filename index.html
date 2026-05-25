@@ -87,7 +87,11 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(128, 0, 32, 0.3);
             display: inline-block;
-            text-decoration: none;
+            font-family: 'Georgia', serif;
+            transition: transform 0.2s;
+        }
+        .scroll-btn:hover {
+            transform: scale(1.05);
         }
 
         /* --- KONTROL TOMBOL AUDIO --- */
@@ -114,15 +118,15 @@
         .gallery-container {
             max-width: 700px;
             margin: 0 auto;
-            padding: 100px 20px 100px 20px;
+            padding: 40px 20px 100px 20px;
         }
 
-        /* --- BINGKAI ELEGAN DAN FADE EFFECT (ANTI-BUG) --- */
+        /* --- BINGKAI ELEGAN DAN FADE EFFECT --- */
         .story-block {
             margin-bottom: 120px;
             display: flex;
             justify-content: center;
-            /* Efek pudar murni CSS saat halaman di-scroll */
+            /* Animasi pudar murni CSS saat scroll */
             animation: fadeInAndOut linear both;
             animation-timeline: view();
             animation-range: entry 10% cover 40%;
@@ -137,7 +141,7 @@
             background: #ffffff;
             padding: 20px 20px 40px 20px;
             border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(74, 12, 22, 0.15); /* Bayangan merah maroon tebal */
+            box-shadow: 0 15px 35px rgba(74, 12, 22, 0.15); /* Bayangan maroon */
             border: 6px double #ffd1dc;
             position: relative;
             max-width: 100%;
@@ -179,27 +183,27 @@
 </head>
 <body>
 
-    <!-- Musik Latar (Akurat memanggil musik.mp3) -->
+    <!-- Musik Latar -->
     <audio id="romantic-music" loop>
         <source src="musik.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Tombol Kontrol Audio -->
+    <!-- Tombol Kontrol Audio Manual -->
     <div class="audio-control" id="audio-toggle" onclick="toggleMusic()" title="Putar/Jeda Musik">🎵</div>
 
     <!-- Wadah Efek Kelopak -->
     <div id="petal-container"></div>
 
-    <!-- Tampilan Awal Website -->
+    <!-- Halaman Pembuka -->
     <header>
         <h1>Our Love Story</h1>
         <p>Gulir ke bawah untuk melihat kenangan manis kita...</p>
-        <!-- Tombol diganti menggunakan jangkar HTML murni, 100% anti-macet -->
-        <a href="#cerita" class="scroll-btn" onclick="startMusicOnly()">Mulai Cerita ✨</a>
+        <!-- Tombol interaktif fisik untuk memicu izin audio browser -->
+        <button class="scroll-btn" onclick="startExperience()">Mulai Cerita ✨</button>
     </header>
 
-    <!-- Titik Awal Gulir -->
-    <div id="cerita"></div>
+    <!-- Titik Target Gulir -->
+    <div id="konten-cerita"></div>
 
     <!-- Konten Utama Galeri Foto -->
     <main class="gallery-container">
@@ -318,4 +322,3 @@
         const music = document.getElementById('romantic-music');
         const audioToggle = document.getElementById('audio-toggle');
 
-        // Fungsi khusus memutar musik saat klik tombol utama
