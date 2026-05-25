@@ -165,78 +165,56 @@
     <!-- Galeri Foto Bergulir -->
     <div class="gallery-container">
         <div class="photo-frame" style="--rotation: -3deg;">
-            <img src="foto1.jpg" alt="Moments">
+            <img src="foto1.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Dari sekian banyak takdir di dunia, bersamamu adalah favoritku. 🤍</div>
         </div>
         <div class="photo-frame" style="--rotation: 4deg;">
-            <img src="foto2.jpg" alt="Moments">
+            <img src="foto2.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Semesta itu luas, tapi duniaku cuma berputar di kamu, Zahrah. ✨</div>
         </div>
         <div class="photo-frame" style="--rotation: -2deg;">
-            <img src="foto3.jpg" alt="Moments">
+            <img src="foto3.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Definisi bahagia paling sederhana? Saat nama kamu jadi alasan aku tersenyum hari ini. 🧸</div>
         </div>
         <div class="photo-frame" style="--rotation: 3deg;">
-            <img src="foto4.jpg" alt="Moments">
+            <img src="foto4.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Kamu itu kayak lagu favorit yang nggak pernah bosen aku putar ulang tiap hari. 🎵</div>
         </div>
         <div class="photo-frame" style="--rotation: -4deg;">
-            <img src="foto5.jpg" alt="Moments">
+            <img src="foto5.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Gak butuh validasi dunia, asal ada kamu di sampingku, semuanya udah lebih dari cukup. 🪐</div>
         </div>
         <div class="photo-frame" style="--rotation: 2deg;">
-            <img src="foto6.jpg" alt="Moments">
+            <img src="foto6.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Sejak ada kamu, aku gak pernah lagi bingung arah pulang. Karena rumahku itu, kamu. 🏡💞</div>
         </div>
         <div class="photo-frame" style="--rotation: -3deg;">
-            <img src="foto7.jpg" alt="Moments">
+            <img src="foto7.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Hari-hariku selalu punya warna baru semenjak kamu memutuskan untuk menetap. 🎨</div>
         </div>
         <div class="photo-frame" style="--rotation: 5deg;">
-            <img src="foto8.jpg" alt="Moments">
+            <img src="foto8.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Terima kasih ya, sudah lahir ke dunia dan jadi bagian paling indah di hidupku. 🥹❤️</div>
         </div>
         <div class="photo-frame" style="--rotation: -2deg;">
-            <img src="foto9.jpg" alt="Moments">
+            <img src="foto9.jpg" alt="Moments" onerror="this.src='https://placehold.co'">
             <div class="caption">Orang bilang jatuh cinta itu rumit, tapi sama kamu semuanya terasa begitu natural. 🍃</div>
         </div>
         <div class="photo-frame" style="--rotation: 4deg;">
-            <img src="foto10.jpg" alt="Moments">
+            <img src="foto10.jpg" alt="Moments" onerror="this.src='https://placehold.co0'">
             <div class="caption">Kamu adalah doa yang diam-diam selalu aku bicarakan dengan Tuhan. 🌌</div>
         </div>
         <div class="photo-frame" style="--rotation: -5deg;">
-            <img src="foto11.jpg" alt="Moments">
+            <img src="foto11.jpg" alt="Moments" onerror="this.src='https://placehold.co1'">
             <div class="caption">Mau seberat apa pun harinya, liat notif atau senyum kamu langsung bikin sembuh lagi. 🩹💘</div>
         </div>
         <div class="photo-frame" style="--rotation: 3deg;">
-            <img src="foto12.jpg" alt="Moments">
+            <img src="foto12.jpg" alt="Moments" onerror="this.src='https://placehold.co2'">
             <div class="caption">Plot twist terbaik dalam hidupku adalah ketika aku menemukan kamu di antara miliaran orang. 🗺️</div>
         </div>
         <div class="photo-frame" style="--rotation: -2deg;">
-            <img src="foto13.jpg" alt="Moments">
+            <img src="foto13.jpg" alt="Moments" onerror="this.src='https://placehold.co3'">
             <div class="caption">Selamanya itu lama, tapi kalau dilewati bareng kamu, rasanya aku gak keberatan. I love you. 💍🔒</div>
         </div>
     </div>
 
-    <!-- Audio Musik Utama -->
-    <audio id="bg-music" src="musik.mp3" loop preload="auto"></audio>
-
-    <!-- Tombol Musik Bulat Murni HTML/CSS -->
-    <div class="music-control" id="music-btn" onclick="putarMusikSempurna()">
-        <svg class="music-icon" id="music-svg" viewBox="0 0 24 24" xmlns="http://w3.org">
-            <path id="music-path" d="M8 5v14l11-7z"/>
-        </svg>
-    </div>
-
-    <script>
-        /* 1. KONTROL AUDIO JAVASCRIPT */
-        const audioSistem = document.getElementById('bg-music');
-        const tombolSistem = document.getElementById('music-btn');
-        const ikonSistem = document.getElementById('music-path');
-
-        function putarMusikSempurna() {
-            if (audioSistem.paused) {
-                audioSistem.play()
-                    .then(() => {
-                        tombolSistem.classList.add('playing');
-                        ikonSistem.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z'); // Ubah ke ikon Pause
